@@ -113,7 +113,7 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            padding-top: 80px;
+            padding-top: 20px;
         }
 
         .hero::before {
@@ -609,9 +609,13 @@
                 padding: 4rem 5%;
             }
 
+            .banners-wrapper {
+                margin-top: 60px;
+            }
+
             .hero {
                 min-height: 100vh;
-                padding-top: 100px;
+                padding-top: 60px;
             }
 
             .hero h1 {
@@ -632,6 +636,10 @@
         }
 
         /* Seasonal Banners */
+        .banners-wrapper {
+            margin-top: 70px;
+        }
+
         .seasonal-banner {
             padding: 1rem 5%;
             text-align: center;
@@ -816,6 +824,7 @@
 </nav>
 
 <!-- Seasonal Banners -->
+<div class="banners-wrapper">
 <div class="seasonal-banner banner-newyear" id="newYearBanner">
     <div class="banner-content">
         <span class="banner-icon">🎆</span>
@@ -862,6 +871,7 @@
         <a href="#properties" class="banner-cta">Act Now</a>
         <button class="banner-close" onclick="dismissBanner('limitedBanner')">×</button>
     </div>
+</div>
 </div>
 
 <section id="home" class="hero">
