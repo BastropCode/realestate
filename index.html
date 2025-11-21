@@ -63,6 +63,14 @@
             transform: scale(1.05);
         }
 
+        .logo-full {
+            display: inline;
+        }
+
+        .logo-short {
+            display: none;
+        }
+
         .nav-links {
             display: flex;
             list-style: none;
@@ -593,6 +601,14 @@
                 display: none;
             }
 
+            .logo-full {
+                display: none;
+            }
+
+            .logo-short {
+                display: inline;
+            }
+
             .properties-grid,
             .services-grid,
             .agents-grid,
@@ -812,7 +828,7 @@
 <body>
 <nav id="navbar">
     <div class="nav-container">
-        <div class="logo">Premier Properties <span>of Bastrop</span></div>
+        <div class="logo"><span class="logo-full">Premier Properties <span>of Bastrop</span></span><span class="logo-short">PP <span>Bastrop</span></span></div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#properties">Properties</a></li>
