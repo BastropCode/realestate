@@ -630,6 +630,175 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Seasonal Banners */
+        .seasonal-banner {
+            padding: 1rem 5%;
+            text-align: center;
+            position: relative;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .seasonal-banner .banner-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+
+        .seasonal-banner .banner-icon {
+            font-size: 1.8rem;
+        }
+
+        .seasonal-banner .banner-text {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .seasonal-banner .banner-text h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .seasonal-banner .banner-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .seasonal-banner .banner-cta {
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .seasonal-banner .banner-close {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            padding: 0.5rem;
+        }
+
+        .seasonal-banner .banner-close:hover {
+            opacity: 1;
+        }
+
+        /* New Year Banner */
+        .banner-newyear {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+        }
+
+        .banner-newyear .banner-cta {
+            background: #c9a961;
+            color: #1a1a2e;
+        }
+
+        .banner-newyear .banner-cta:hover {
+            background: #d4b872;
+            transform: translateY(-2px);
+        }
+
+        .banner-newyear .banner-close {
+            color: #fff;
+        }
+
+        /* Winter Sale Banner */
+        .banner-winter {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+        }
+
+        .banner-winter .banner-cta {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border: 2px solid #fff;
+        }
+
+        .banner-winter .banner-cta:hover {
+            background: #fff;
+            color: #764ba2;
+        }
+
+        .banner-winter .banner-close {
+            color: #fff;
+        }
+
+        /* Spring Open House Banner */
+        .banner-spring {
+            background: linear-gradient(135deg, #2C5F2D 0%, #3a7a3b 100%);
+            color: #fff;
+        }
+
+        .banner-spring .banner-cta {
+            background: #c9a961;
+            color: #2C5F2D;
+        }
+
+        .banner-spring .banner-cta:hover {
+            background: #d4b872;
+            transform: translateY(-2px);
+        }
+
+        .banner-spring .banner-close {
+            color: #fff;
+        }
+
+        /* Limited Time Banner */
+        .banner-limited {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+            color: #fff;
+        }
+
+        .banner-limited .banner-cta {
+            background: #fff;
+            color: #ee5a5a;
+        }
+
+        .banner-limited .banner-cta:hover {
+            background: #f8f8f8;
+            transform: translateY(-2px);
+        }
+
+        .banner-limited .banner-close {
+            color: #fff;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .seasonal-banner .banner-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .seasonal-banner .banner-text {
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -645,6 +814,55 @@
         </ul>
     </div>
 </nav>
+
+<!-- Seasonal Banners -->
+<div class="seasonal-banner banner-newyear" id="newYearBanner">
+    <div class="banner-content">
+        <span class="banner-icon">🎆</span>
+        <div class="banner-text">
+            <h3>New Year Special - 2025!</h3>
+            <p>Start the year in your dream home. Get exclusive pricing on select properties through January 31st.</p>
+        </div>
+        <a href="#properties" class="banner-cta">View Deals</a>
+        <button class="banner-close" onclick="dismissBanner('newYearBanner')">×</button>
+    </div>
+</div>
+
+<div class="seasonal-banner banner-winter" id="winterBanner">
+    <div class="banner-content">
+        <span class="banner-icon">❄️</span>
+        <div class="banner-text">
+            <h3>Winter Home Sale</h3>
+            <p>Cozy up to savings! Reduced closing costs on featured luxury homes this season.</p>
+        </div>
+        <a href="#properties" class="banner-cta">Explore Now</a>
+        <button class="banner-close" onclick="dismissBanner('winterBanner')">×</button>
+    </div>
+</div>
+
+<div class="seasonal-banner banner-spring" id="springBanner" style="display: none;">
+    <div class="banner-content">
+        <span class="banner-icon">🌸</span>
+        <div class="banner-text">
+            <h3>Spring Open House Weekend</h3>
+            <p>Tour our newest listings! Free consultations and refreshments at all open houses.</p>
+        </div>
+        <a href="#contact" class="banner-cta">Schedule Tour</a>
+        <button class="banner-close" onclick="dismissBanner('springBanner')">×</button>
+    </div>
+</div>
+
+<div class="seasonal-banner banner-limited" id="limitedBanner" style="display: none;">
+    <div class="banner-content">
+        <span class="banner-icon">🔥</span>
+        <div class="banner-text">
+            <h3>Limited Time Offer</h3>
+            <p>Only 3 premium estates left at pre-market prices. Don't miss out!</p>
+        </div>
+        <a href="#properties" class="banner-cta">Act Now</a>
+        <button class="banner-close" onclick="dismissBanner('limitedBanner')">×</button>
+    </div>
+</div>
 
 <section id="home" class="hero">
     <div class="hero-content">
@@ -898,6 +1116,31 @@
 </footer>
 
 <script>
+    // Banner dismiss function
+    function dismissBanner(bannerId) {
+        const banner = document.getElementById(bannerId);
+        if (banner) {
+            banner.style.animation = 'slideDown 0.3s ease-out reverse';
+            setTimeout(() => {
+                banner.style.display = 'none';
+                localStorage.setItem(bannerId + '_dismissed', 'true');
+            }, 300);
+        }
+    }
+
+    // Check for previously dismissed banners on page load
+    window.addEventListener('DOMContentLoaded', () => {
+        const banners = ['newYearBanner', 'winterBanner', 'springBanner', 'limitedBanner'];
+        banners.forEach(bannerId => {
+            if (localStorage.getItem(bannerId + '_dismissed') === 'true') {
+                const banner = document.getElementById(bannerId);
+                if (banner) {
+                    banner.style.display = 'none';
+                }
+            }
+        });
+    });
+
     // Navbar scroll effect
     window.addEventListener('scroll', () => {
         const navbar = document.getElementById('navbar');
