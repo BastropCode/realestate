@@ -1,1317 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premier Properties of Bastrop - Luxury Real Estate</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Georgia', serif;
-            background: #fff;
-            color: #2c3e50;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1rem 5%;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        nav.scrolled {
-            background: rgba(255, 255, 255, 1);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            color: #2c3e50;
-            font-family: 'Georgia', serif;
-        }
-
-        .logo span {
-            color: #2C5F2D;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .logo-full {
-            display: inline;
-        }
-
-        .logo-short {
-            display: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-        }
-
-        .nav-links a {
-            color: #2c3e50;
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            transition: all 0.3s ease;
-            font-family: 'Arial', sans-serif;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .nav-links a:hover {
-            color: #2C5F2D;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #2C5F2D;
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                        url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1600&h=900&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            padding-top: 20px;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(44,62,80,0.7) 0%, rgba(44,95,45,0.5) 50%, rgba(201,169,97,0.3) 100%);
-        }
-
-        .hero-content {
-            max-width: 900px;
-            z-index: 2;
-            position: relative;
-            padding: 0 2rem;
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            letter-spacing: -1px;
-            animation: slideUp 1s ease-out;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .hero .subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.6rem);
-            margin-bottom: 2.5rem;
-            color: #f5f5f5;
-            animation: slideUp 1s ease-out 0.2s both;
-            font-family: 'Arial', sans-serif;
-            font-weight: 300;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1.2rem 3rem;
-            background: linear-gradient(135deg, #2C5F2D 0%, #3a7a3b 100%);
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1rem;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            animation: slideUp 1s ease-out 0.4s both;
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(44,95,45,0.4);
-            background: linear-gradient(135deg, #3a7a3b 0%, #2C5F2D 100%);
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Sections */
-        section {
-            padding: 6rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h2 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            margin-bottom: 1rem;
-            text-align: center;
-            font-weight: 700;
-            color: #2c3e50;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: #7f8c8d;
-            font-size: 1.2rem;
-            margin-bottom: 4rem;
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* Featured Properties */
-        .properties-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-
-        .property-card {
-            background: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            cursor: pointer;
-        }
-
-        .property-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .property-image {
-            width: 100%;
-            height: 250px;
-            position: relative;
-            overflow: hidden;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .property-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #2C5F2D;
-            color: #fff;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            z-index: 1;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .property-details {
-            padding: 2rem;
-        }
-
-        .property-price {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #c9a961;
-            margin-bottom: 0.5rem;
-        }
-
-        .property-address {
-            color: #7f8c8d;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .property-features {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid #ecf0f1;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #2c3e50;
-            font-size: 0.9rem;
-        }
-
-        /* Services Section */
-        .services {
-            background: #f8f9fa;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            background: #fff;
-            padding: 2.5rem;
-            border-radius: 10px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid #ecf0f1;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #2C5F2D 0%, #c9a961 100%);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .service-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .service-card p {
-            color: #7f8c8d;
-            line-height: 1.8;
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* Agents Section */
-        .agents-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-
-        .agent-card {
-            background: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-        }
-
-        .agent-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .agent-photo {
-            width: 100%;
-            height: 300px;
-            position: relative;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .agent-info {
-            padding: 2rem;
-        }
-
-        .agent-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #2c3e50;
-        }
-
-        .agent-title {
-            color: #c9a961;
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .agent-contact {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* Testimonials */
-        .testimonials {
-            background: #f8f9fa;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .testimonial-card {
-            background: #fff;
-            padding: 2.5rem;
-            border-radius: 10px;
-            border-left: 4px solid #2C5F2D;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            font-size: 1.05rem;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #c9a961 0%, #2c3e50 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .author-info h4 {
-            color: #2c3e50;
-            font-size: 1.1rem;
-            margin-bottom: 0.2rem;
-        }
-
-        .author-info p {
-            color: #7f8c8d;
-            font-size: 0.9rem;
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* Stats Section */
-        .stats {
-            background: #2c3e50;
-            color: #fff;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .stat {
-            text-align: center;
-            padding: 1.5rem;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #c9a961;
-        }
-
-        .stat-label {
-            color: #ecf0f1;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* Contact */
-        .contact-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 4rem;
-            margin: 3rem 0;
-            flex-wrap: wrap;
-        }
-
-        .contact-item {
-            text-align: center;
-        }
-
-        .contact-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #2C5F2D;
-        }
-
-        .contact-item h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: #2c3e50;
-        }
-
-        .contact-item p {
-            color: #7f8c8d;
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* Footer */
-        footer {
-            background: #2c3e50;
-            text-align: center;
-            padding: 3rem 5%;
-            color: #ecf0f1;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            color: #fff;
-        }
-
-        .footer-logo span {
-            color: #2C5F2D;
-        }
-
-        .footer-text {
-            color: #95a5a6;
-            margin-top: 1rem;
-            font-family: 'Arial', sans-serif;
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .logo-full {
-                display: none;
-            }
-
-            .logo-short {
-                display: inline;
-            }
-
-            .properties-grid,
-            .services-grid,
-            .agents-grid,
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-info {
-                flex-direction: column;
-                gap: 2rem;
-            }
-
-            section {
-                padding: 4rem 5%;
-            }
-
-            .banners-wrapper {
-                margin-top: 60px;
-            }
-
-            .hero {
-                min-height: 100vh;
-                padding-top: 60px;
-            }
-
-            .hero h1 {
-                font-size: clamp(2rem, 10vw, 3.5rem);
-            }
-        }
-
-        /* Scroll Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Seasonal Banners */
-        .banners-wrapper {
-            margin-top: 70px;
-        }
-
-        .seasonal-banner {
-            padding: 1rem 5%;
-            text-align: center;
-            position: relative;
-            animation: slideDown 0.5s ease-out;
-        }
-
-        .seasonal-banner .banner-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1.5rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-        }
-
-        .seasonal-banner .banner-icon {
-            font-size: 1.8rem;
-        }
-
-        .seasonal-banner .banner-text {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .seasonal-banner .banner-text h3 {
-            font-size: 1.1rem;
-            margin-bottom: 0.25rem;
-            font-weight: 600;
-        }
-
-        .seasonal-banner .banner-text p {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .seasonal-banner .banner-cta {
-            padding: 0.6rem 1.2rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .seasonal-banner .banner-close {
-            background: none;
-            border: none;
-            font-size: 1.3rem;
-            cursor: pointer;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-            padding: 0.5rem;
-        }
-
-        .seasonal-banner .banner-close:hover {
-            opacity: 1;
-        }
-
-        /* New Year Banner */
-        .banner-newyear {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            color: #fff;
-        }
-
-        .banner-newyear .banner-cta {
-            background: #c9a961;
-            color: #1a1a2e;
-        }
-
-        .banner-newyear .banner-cta:hover {
-            background: #d4b872;
-            transform: translateY(-2px);
-        }
-
-        .banner-newyear .banner-close {
-            color: #fff;
-        }
-
-        /* Winter Sale Banner */
-        .banner-winter {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #fff;
-        }
-
-        .banner-winter .banner-cta {
-            background: rgba(255,255,255,0.2);
-            color: #fff;
-            border: 2px solid #fff;
-        }
-
-        .banner-winter .banner-cta:hover {
-            background: #fff;
-            color: #764ba2;
-        }
-
-        .banner-winter .banner-close {
-            color: #fff;
-        }
-
-        /* Spring Open House Banner */
-        .banner-spring {
-            background: linear-gradient(135deg, #2C5F2D 0%, #3a7a3b 100%);
-            color: #fff;
-        }
-
-        .banner-spring .banner-cta {
-            background: #c9a961;
-            color: #2C5F2D;
-        }
-
-        .banner-spring .banner-cta:hover {
-            background: #d4b872;
-            transform: translateY(-2px);
-        }
-
-        .banner-spring .banner-close {
-            color: #fff;
-        }
-
-        /* Limited Time Banner */
-        .banner-limited {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
-            color: #fff;
-        }
-
-        .banner-limited .banner-cta {
-            background: #fff;
-            color: #ee5a5a;
-        }
-
-        .banner-limited .banner-cta:hover {
-            background: #f8f8f8;
-            transform: translateY(-2px);
-        }
-
-        .banner-limited .banner-close {
-            color: #fff;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-100%);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .seasonal-banner {
-                padding: 0.75rem 3%;
-            }
-
-            .seasonal-banner .banner-content {
-                flex-direction: row;
-                flex-wrap: nowrap;
-                gap: 0.75rem;
-                align-items: center;
-            }
-
-            .seasonal-banner .banner-icon {
-                font-size: 1.4rem;
-                flex-shrink: 0;
-            }
-
-            .seasonal-banner .banner-text {
-                flex: 1;
-                min-width: 0;
-                text-align: left;
-            }
-
-            .seasonal-banner .banner-text h3 {
-                font-size: 0.85rem;
-                margin-bottom: 0.1rem;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-
-            .seasonal-banner .banner-text p {
-                font-size: 0.7rem;
-                line-height: 1.3;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-            }
-
-            .seasonal-banner .banner-cta {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.7rem;
-                flex-shrink: 0;
-                white-space: nowrap;
-            }
-
-            .seasonal-banner .banner-close {
-                font-size: 1.1rem;
-                padding: 0.3rem;
-                flex-shrink: 0;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Premier Properties of Bastrop - Luxury Real Estate</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<nav id="navbar">
+  <nav id="navbar">
     <div class="nav-container">
-        <div class="logo"><span class="logo-full">Premier Properties <span>of Bastrop</span></span><span class="logo-short"><span style="color: #c9a961;">P</span>P <span>Bastrop</span></span></div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#properties">Properties</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#agents">Agents</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+      <div class="logo">Premier<span>Properties</span></div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#properties">Listings</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#agents">Team</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
-</nav>
+  </nav>
 
-<!-- Seasonal Banners -->
-<div class="banners-wrapper">
-<div class="seasonal-banner banner-newyear" id="newYearBanner">
-    <div class="banner-content">
-        <span class="banner-icon">🎆</span>
-        <div class="banner-text">
-            <h3>New Year Special - 2025!</h3>
-            <p>Start the year in your dream home. Get exclusive pricing on select properties through January 31st.</p>
-        </div>
-        <a href="#properties" class="banner-cta">View Deals</a>
-        <button class="banner-close" onclick="dismissBanner('newYearBanner')">×</button>
-    </div>
-</div>
-
-<div class="seasonal-banner banner-spring" id="springBanner" style="display: none;">
-    <div class="banner-content">
-        <span class="banner-icon">🌸</span>
-        <div class="banner-text">
-            <h3>Spring Open House Weekend</h3>
-            <p>Tour our newest listings! Free consultations and refreshments at all open houses.</p>
-        </div>
-        <a href="#contact" class="banner-cta">Schedule Tour</a>
-        <button class="banner-close" onclick="dismissBanner('springBanner')">×</button>
-    </div>
-</div>
-
-<div class="seasonal-banner banner-limited" id="limitedBanner" style="display: none;">
-    <div class="banner-content">
-        <span class="banner-icon">🔥</span>
-        <div class="banner-text">
-            <h3>Limited Time Offer</h3>
-            <p>Only 3 premium estates left at pre-market prices. Don't miss out!</p>
-        </div>
-        <a href="#properties" class="banner-cta">Act Now</a>
-        <button class="banner-close" onclick="dismissBanner('limitedBanner')">×</button>
-    </div>
-</div>
-</div>
-
-<section id="home" class="hero">
+  <header class="hero" id="home">
+    <div class="hero-backdrop"></div>
+    <div class="floating-badge">Bastrop's Luxury Specialists</div>
     <div class="hero-content">
-        <h1>Find Your Dream Home</h1>
-        <p class="subtitle">Discover luxury properties in the most desirable locations with Premier Properties of Bastrop</p>
-        <a href="#properties" class="cta-button">Explore Properties</a>
+      <p class="eyebrow">Boutique Real Estate • Central Texas</p>
+      <h1>Live beautifully in the heart of Bastrop</h1>
+      <p class="subtitle">
+        Hand-curated properties, concierge-level service, and thoughtful guidance from the first tour to closing day.
+      </p>
+      <div class="hero-actions">
+        <a class="cta primary" href="#properties">Browse Premier Listings</a>
+        <a class="cta ghost" href="#services">Book a Private Tour</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card fade-in">
+          <span class="label">Closed Volume</span>
+          <span class="value stat-number">$185M+</span>
+          <span class="hint">Last 24 months</span>
+        </div>
+        <div class="stat-card fade-in">
+          <span class="label">Client Satisfaction</span>
+          <span class="value stat-number">98%</span>
+          <span class="hint">Referrals &amp; repeats</span>
+        </div>
+        <div class="stat-card fade-in">
+          <span class="label">Days on Market</span>
+          <span class="value stat-number">21</span>
+          <span class="hint">Average across listings</span>
+        </div>
+      </div>
     </div>
-</section>
+  </header>
 
-<section id="properties" class="properties fade-in">
-    <h2>Featured Properties</h2>
-    <p class="section-subtitle">Handpicked exclusive listings for discerning buyers</p>
-    <div class="properties-grid">
-        <div class="property-card">
-            <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&h=600&fit=crop');">
-                <span class="property-badge">For Sale</span>
-            </div>
-            <div class="property-details">
-                <div class="property-price">$2,850,000</div>
-                <div class="property-address">1234 Bayou Boulevard, Houston, TX</div>
-                <div class="property-features">
-                    <div class="feature">🛏️ 5 Beds</div>
-                    <div class="feature">🛁 4 Baths</div>
-                    <div class="feature">📏 4,200 sqft</div>
-                </div>
-            </div>
+  <main>
+    <section class="section cards" id="properties">
+      <div class="section-header">
+        <p class="eyebrow">Featured Listings</p>
+        <div class="title-row">
+          <h2>Curated homes crafted for living</h2>
+          <a class="text-link" href="#contact">Request a bespoke search →</a>
         </div>
-        <div class="property-card">
-            <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop');">
-                <span class="property-badge">For Sale</span>
+        <p class="section-subtitle">Architectural gems, riverfront retreats, and modern estates ready for their next chapter.</p>
+      </div>
+      <div class="properties-grid">
+        <article class="property-card fade-in">
+          <div class="property-media" style="background-image: url('https://images.unsplash.com/photo-1617099390840-9c145c0d9fb0?auto=format&fit=crop&w=1200&q=80');">
+            <span class="pill">New to Market</span>
+          </div>
+          <div class="property-body">
+            <div class="property-top">
+              <p class="price">$1,480,000</p>
+              <p class="address">52 Riverstone Way, Bastrop, TX</p>
             </div>
-            <div class="property-details">
-                <div class="property-price">$1,950,000</div>
-                <div class="property-address">567 Uptown Boulevard, Dallas, TX</div>
-                <div class="property-features">
-                    <div class="feature">🛏️ 4 Beds</div>
-                    <div class="feature">🛁 3 Baths</div>
-                    <div class="feature">📏 3,100 sqft</div>
-                </div>
+            <p class="description">Expansive riverfront living with glass walls, chef's kitchen, and tiered outdoor lounges.</p>
+            <div class="features">
+              <span>4 Beds</span>
+              <span>4.5 Baths</span>
+              <span>4,200 sqft</span>
             </div>
+            <div class="card-actions">
+              <button class="ghost-btn">Tour Property</button>
+              <button class="solid-btn">View Details</button>
+            </div>
+          </div>
+        </article>
+        <article class="property-card fade-in">
+          <div class="property-media" style="background-image: url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80');">
+            <span class="pill secondary">Move-in Ready</span>
+          </div>
+          <div class="property-body">
+            <div class="property-top">
+              <p class="price">$920,000</p>
+              <p class="address">108 Juniper Ridge, Bastrop, TX</p>
+            </div>
+            <p class="description">Light-filled hill country sanctuary with vaulted ceilings, bespoke millwork, and resort pool.</p>
+            <div class="features">
+              <span>3 Beds</span>
+              <span>3 Baths</span>
+              <span>3,100 sqft</span>
+            </div>
+            <div class="card-actions">
+              <button class="ghost-btn">Book a Showing</button>
+              <button class="solid-btn">View Details</button>
+            </div>
+          </div>
+        </article>
+        <article class="property-card fade-in">
+          <div class="property-media" style="background-image: url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1200&q=80');">
+            <span class="pill">Private Listing</span>
+          </div>
+          <div class="property-body">
+            <div class="property-top">
+              <p class="price">$2,050,000</p>
+              <p class="address">12 Loblolly Cove, Lake Bastrop</p>
+            </div>
+            <p class="description">Architect-designed lake house with cantilevered decks, spa, and uninterrupted water views.</p>
+            <div class="features">
+              <span>5 Beds</span>
+              <span>5.5 Baths</span>
+              <span>5,000 sqft</span>
+            </div>
+            <div class="card-actions">
+              <button class="ghost-btn">Arrange Access</button>
+              <button class="solid-btn">View Details</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section split" id="services">
+      <div class="content">
+        <p class="eyebrow">Concierge Services</p>
+        <h2>White-glove guidance at every turn</h2>
+        <p class="section-subtitle">
+          From market analysis to staging, our specialists orchestrate every detail to showcase your home and protect your investment.
+        </p>
+        <div class="service-list">
+          <div class="service-item fade-in">
+            <h3>Strategic Listing Prep</h3>
+            <p>Editorial staging, cinematic media, and data-backed pricing ensure your property debuts with confidence.</p>
+          </div>
+          <div class="service-item fade-in">
+            <h3>Private Buyer Representation</h3>
+            <p>Quiet listings, off-market access, and tailored tours aligned with your lifestyle, commute, and investment goals.</p>
+          </div>
+          <div class="service-item fade-in">
+            <h3>Closing Concierge</h3>
+            <p>Preferred lenders, inspectors, and legal partners keep your transaction seamless from offer to keys-in-hand.</p>
+          </div>
         </div>
-        <div class="property-card">
-            <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop');">
-                <span class="property-badge">For Rent</span>
-            </div>
-            <div class="property-details">
-                <div class="property-price">$8,500/mo</div>
-                <div class="property-address">890 Riverwalk Plaza, San Antonio, TX</div>
-                <div class="property-features">
-                    <div class="feature">🛏️ 3 Beds</div>
-                    <div class="feature">🛁 2 Baths</div>
-                    <div class="feature">📏 2,400 sqft</div>
-                </div>
-            </div>
+      </div>
+      <div class="visual-panel">
+        <div class="floating-card">
+          <p class="label">Signature Support</p>
+          <h4>Dedicated advisor, weekly pulse reports, and 24/7 communication.</h4>
+          <div class="chip-row">
+            <span class="chip">Modern staging</span>
+            <span class="chip">Drone &amp; twilight media</span>
+            <span class="chip">Neighborhood analytics</span>
+            <span class="chip">Offer strategy labs</span>
+          </div>
+          <a class="text-link" href="#contact">Schedule a consultation →</a>
         </div>
-        <div class="property-card">
-            <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?w=800&h=600&fit=crop');">
-                <span class="property-badge">For Sale</span>
+        <div class="accent-blob"></div>
+      </div>
+    </section>
+
+    <section class="section agents" id="agents">
+      <div class="section-header">
+        <p class="eyebrow">Meet the Collective</p>
+        <h2>Seasoned advocates with local roots</h2>
+        <p class="section-subtitle">Our team blends design sensibility with negotiation expertise to secure outcomes you love.</p>
+      </div>
+      <div class="agents-grid">
+        <div class="agent-card fade-in">
+          <div class="agent-photo" style="background-image: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80');"></div>
+          <div class="agent-info">
+            <h3>Amelia Cruz</h3>
+            <p class="role">Principal Broker</p>
+            <p class="bio">15 years crafting luxury experiences, record-setting lakefront closings, and a passion for thoughtful design.</p>
+            <div class="agent-actions">
+              <button class="ghost-btn">Email Amelia</button>
+              <button class="solid-btn">Schedule Call</button>
             </div>
-            <div class="property-details">
-                <div class="property-price">$3,200,000</div>
-                <div class="property-address">456 Stockyards Avenue, Fort Worth, TX</div>
-                <div class="property-features">
-                    <div class="feature">🛏️ 6 Beds</div>
-                    <div class="feature">🛁 5 Baths</div>
-                    <div class="feature">📏 5,500 sqft</div>
-                </div>
-            </div>
+          </div>
         </div>
-        <div class="property-card">
-            <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1599809275671-b5942cabc7a2?w=800&h=600&fit=crop');">
-                <span class="property-badge">For Sale</span>
+        <div class="agent-card fade-in">
+          <div class="agent-photo" style="background-image: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80&sat=-100');"></div>
+          <div class="agent-info">
+            <h3>Marcus Lee</h3>
+            <p class="role">Buyer Specialist</p>
+            <p class="bio">Neighborhood insider with a knack for private listings, investment analysis, and stress-free relocations.</p>
+            <div class="agent-actions">
+              <button class="ghost-btn">Email Marcus</button>
+              <button class="solid-btn">Schedule Call</button>
             </div>
-            <div class="property-details">
-                <div class="property-price">$1,575,000</div>
-                <div class="property-address">789 Highland Avenue, Austin, TX</div>
-                <div class="property-features">
-                    <div class="feature">🛏️ 4 Beds</div>
-                    <div class="feature">🛁 3 Baths</div>
-                    <div class="feature">📏 3,600 sqft</div>
-                </div>
-            </div>
+          </div>
         </div>
-        <div class="property-card">
-            <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&h=600&fit=crop');">
-                <span class="property-badge">For Rent</span>
+        <div class="agent-card fade-in">
+          <div class="agent-photo" style="background-image: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80&sat=-80');"></div>
+          <div class="agent-info">
+            <h3>Sophia Grant</h3>
+            <p class="role">Listing Director</p>
+            <p class="bio">Brings magazine-worthy staging, cinematic storytelling, and meticulous transaction care to every listing.</p>
+            <div class="agent-actions">
+              <button class="ghost-btn">Email Sophia</button>
+              <button class="solid-btn">Schedule Call</button>
             </div>
-            <div class="property-details">
-                <div class="property-price">$6,200/mo</div>
-                <div class="property-address">321 Franklin Mountain Drive, El Paso, TX</div>
-                <div class="property-features">
-                    <div class="feature">🛏️ 3 Beds</div>
-                    <div class="feature">🛁 2 Baths</div>
-                    <div class="feature">📏 2,100 sqft</div>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <section class="section testimonials" id="contact">
+      <div class="section-header">
+        <p class="eyebrow">Client Stories</p>
+        <h2>“They made luxury feel effortless.”</h2>
+        <p class="section-subtitle">Trusted by executives, founders, and families who expect discretion and flawless execution.</p>
+      </div>
+      <div class="testimonial-grid">
+        <div class="testimonial-card fade-in">
+          <p class="quote">“Our listing went live on Friday and was under contract by Sunday. The media and staging were magazine-worthy.”</p>
+          <div class="author">
+            <div class="avatar">JC</div>
+            <div>
+              <p class="name">Jordan &amp; Casey</p>
+              <p class="meta">River District Sellers</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card fade-in">
+          <p class="quote">“They surfaced an off-market lake house that checked every box. We closed in 17 days with zero surprises.”</p>
+          <div class="author">
+            <div class="avatar">ML</div>
+            <div>
+              <p class="name">Mei &amp; Louis</p>
+              <p class="meta">Lake Bastrop Buyers</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card fade-in">
+          <p class="quote">“Weekly updates, data-driven advice, and calm negotiations. It felt like having a COO for our move.”</p>
+          <div class="author">
+            <div class="avatar">AR</div>
+            <div>
+              <p class="name">Aisha R.</p>
+              <p class="meta">Relocation Client</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-cta">
+        <div>
+          <p class="eyebrow">Ready to talk next steps?</p>
+          <h3>Let’s craft a plan for your next move.</h3>
+          <p class="section-subtitle">Share your goals and we’ll respond same-day with tailored options.</p>
+        </div>
+        <div class="contact-actions">
+          <input type="email" placeholder="Your email" aria-label="Email" />
+          <button class="solid-btn">Start the Conversation</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h4>Premier Properties of Bastrop</h4>
+        <p>Elevated real estate experiences across Bastrop and Central Texas.</p>
+      </div>
+      <div>
+        <h5>Visit</h5>
+        <p>102 Main Street<br />Bastrop, TX</p>
+      </div>
+      <div>
+        <h5>Connect</h5>
+        <p>hello@premierbastrop.com<br />512 • 555 • 0199</p>
+      </div>
+      <div>
+        <h5>Follow</h5>
+        <div class="socials">
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Facebook</a>
+        </div>
+      </div>
     </div>
-</section>
+    <p class="footer-note">© 2024 Premier Properties of Bastrop. Crafted with care.</p>
+  </footer>
 
-<section id="services" class="services fade-in">
-    <h2>Our Services</h2>
-    <p class="section-subtitle">Comprehensive real estate solutions tailored to your needs</p>
-    <div class="services-grid">
-        <div class="service-card">
-            <span class="service-icon">🏡</span>
-            <h3>Buy a Home</h3>
-            <p>Find your perfect property with our extensive portfolio of luxury homes, condos, and estates in prime locations.</p>
-        </div>
-        <div class="service-card">
-            <span class="service-icon">💰</span>
-            <h3>Sell Your Property</h3>
-            <p>Get the best value for your property with our expert marketing strategies and negotiation expertise.</p>
-        </div>
-        <div class="service-card">
-            <span class="service-icon">🔑</span>
-            <h3>Property Rentals</h3>
-            <p>Discover premium rental properties or let us manage your investment properties with care and professionalism.</p>
-        </div>
-        <div class="service-card">
-            <span class="service-icon">📊</span>
-            <h3>Market Analysis</h3>
-            <p>Access detailed market insights and property valuations to make informed real estate investment decisions.</p>
-        </div>
-    </div>
-</section>
-
-<section class="stats fade-in">
-    <h2>Our Track Record</h2>
-    <div class="stats-grid">
-        <div class="stat">
-            <span class="stat-number">1,200+</span>
-            <span class="stat-label">Properties Sold</span>
-        </div>
-        <div class="stat">
-            <span class="stat-number">$850M+</span>
-            <span class="stat-label">Total Sales Value</span>
-        </div>
-        <div class="stat">
-            <span class="stat-number">98%</span>
-            <span class="stat-label">Client Satisfaction</span>
-        </div>
-        <div class="stat">
-            <span class="stat-number">15+</span>
-            <span class="stat-label">Years Experience</span>
-        </div>
-    </div>
-</section>
-
-<section id="agents" class="agents fade-in">
-    <h2>Meet Our Agents</h2>
-    <p class="section-subtitle">Expert professionals dedicated to your real estate success</p>
-    <div class="agents-grid">
-        <div class="agent-card">
-            <div class="agent-photo" style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=800&fit=crop&crop=faces');"></div>
-            <div class="agent-info">
-                <h3>Sarah Mitchell</h3>
-                <p class="agent-title">Senior Real Estate Advisor</p>
-                <p class="agent-contact">sarah.mitchell@premierproperties.com</p>
-                <p class="agent-contact">(555) 234-5678</p>
-            </div>
-        </div>
-        <div class="agent-card">
-            <div class="agent-photo" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&fit=crop&crop=faces');"></div>
-            <div class="agent-info">
-                <h3>Michael Rodriguez</h3>
-                <p class="agent-title">Luxury Property Specialist</p>
-                <p class="agent-contact">michael.rodriguez@premierproperties.com</p>
-                <p class="agent-contact">(555) 345-6789</p>
-            </div>
-        </div>
-        <div class="agent-card">
-            <div class="agent-photo" style="background-image: url('https://images.unsplash.com/photo-1598550874175-4d0ef436c909?w=600&h=800&fit=crop&crop=faces');"></div>
-            <div class="agent-info">
-                <h3>Emily Chen</h3>
-                <p class="agent-title">Commercial Real Estate Expert</p>
-                <p class="agent-contact">emily.chen@premierproperties.com</p>
-                <p class="agent-contact">(555) 456-7890</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="testimonials fade-in">
-    <h2>What Our Clients Say</h2>
-    <p class="section-subtitle">Hear from those who've found their dream properties with us</p>
-    <div class="testimonials-grid">
-        <div class="testimonial-card">
-            <p class="testimonial-text">"Premier Properties of Bastrop helped us find our dream home in record time. Their professionalism and market knowledge made the entire process seamless. Highly recommended!"</p>
-            <div class="testimonial-author">
-                <div class="author-avatar">JD</div>
-                <div class="author-info">
-                    <h4>John & Diana Peterson</h4>
-                    <p>Homebuyers, Malibu</p>
-                </div>
-            </div>
-        </div>
-        <div class="testimonial-card">
-            <p class="testimonial-text">"Selling our property was stress-free thanks to the Premier team. They achieved a sale price well above our expectations and handled everything professionally."</p>
-            <div class="testimonial-author">
-                <div class="author-avatar">RT</div>
-                <div class="author-info">
-                    <h4>Robert Thompson</h4>
-                    <p>Property Seller, New York</p>
-                </div>
-            </div>
-        </div>
-        <div class="testimonial-card">
-            <p class="testimonial-text">"As first-time buyers, we were nervous about the process. The team at Premier Properties of Bastrop guided us every step of the way and found us the perfect starter home."</p>
-            <div class="testimonial-author">
-                <div class="author-avatar">AM</div>
-                <div class="author-info">
-                    <h4>Amanda Martinez</h4>
-                    <p>First-Time Buyer, Austin</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="contact" class="contact fade-in">
-    <h2>Get in Touch</h2>
-    <div class="contact-content">
-        <p class="section-subtitle">Ready to find your dream property? Contact us today and let's make it happen.</p>
-        <div class="contact-info">
-            <div class="contact-item">
-                <div class="contact-icon">✉</div>
-                <h4>Email</h4>
-                <p>info@premierproperties.com</p>
-            </div>
-            <div class="contact-item">
-                <div class="contact-icon">☏</div>
-                <h4>Phone</h4>
-                <p>(555) 123-4567</p>
-            </div>
-            <div class="contact-item">
-                <div class="contact-icon">◆</div>
-                <h4>Office</h4>
-                <p>1015 Main Street, Bastrop, TX 78602</p>
-            </div>
-        </div>
-        <a href="mailto:info@premierproperties.com" class="cta-button">Schedule a Consultation</a>
-    </div>
-</section>
-
-<footer>
-    <div class="footer-content">
-        <div class="footer-logo">Premier Properties <span>of Bastrop</span></div>
-        <p class="footer-text">&copy; 2025 Premier Properties of Bastrop. All rights reserved. | Luxury Real Estate Excellence</p>
-    </div>
-</footer>
-
-<script>
-    // Banner dismiss function
-    function dismissBanner(bannerId) {
-        const banner = document.getElementById(bannerId);
-        if (banner) {
-            banner.style.animation = 'slideDown 0.3s ease-out reverse';
-            setTimeout(() => {
-                banner.style.display = 'none';
-                localStorage.setItem(bannerId + '_dismissed', 'true');
-            }, 300);
-        }
-    }
-
-    // Check for previously dismissed banners on page load
-    window.addEventListener('DOMContentLoaded', () => {
-        const banners = ['newYearBanner', 'winterBanner', 'springBanner', 'limitedBanner'];
-        banners.forEach(bannerId => {
-            if (localStorage.getItem(bannerId + '_dismissed') === 'true') {
-                const banner = document.getElementById(bannerId);
-                if (banner) {
-                    banner.style.display = 'none';
-                }
-            }
-        });
-    });
-
-    // Navbar scroll effect
-    window.addEventListener('scroll', () => {
-        const navbar = document.getElementById('navbar');
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
-
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // Scroll animations
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.fade-in').forEach(el => {
-        observer.observe(el);
-    });
-
-    // Property card stagger animation
-    const propertyCards = document.querySelectorAll('.property-card');
-    propertyCards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-    });
-
-    // Stats counter animation
-    const stats = document.querySelectorAll('.stat-number');
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const target = entry.target;
-                const text = target.textContent;
-                const hasPlus = text.includes('+');
-                const isPercent = text.includes('%');
-                const hasMoney = text.includes('$');
-                const hasM = text.includes('M');
-
-                let numText = text.replace(/[+%$M,]/g, '');
-                let endValue = parseFloat(numText);
-
-                animateCounter(target, 0, endValue, 2000, hasPlus, isPercent, hasMoney, hasM);
-                statsObserver.unobserve(target);
-            }
-        });
-    });
-
-    stats.forEach(stat => statsObserver.observe(stat));
-
-    function animateCounter(element, start, end, duration, hasPlus, isPercent, hasMoney, hasM) {
-        let startTime = null;
-
-        function animate(currentTime) {
-            if (startTime === null) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const progress = Math.min(timeElapsed / duration, 1);
-
-            const currentValue = start + (end - start) * easeOutQuart(progress);
-
-            let displayValue = '';
-            if (hasMoney) {
-                displayValue = '$' + Math.floor(currentValue);
-                if (hasM) {
-                    displayValue = '$' + Math.floor(currentValue) + 'M';
-                }
-            } else if (isPercent) {
-                displayValue = Math.floor(currentValue) + '%';
-            } else {
-                displayValue = Math.floor(currentValue).toLocaleString();
-            }
-
-            if (hasPlus) {
-                displayValue += '+';
-            }
-
-            element.textContent = displayValue;
-
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            }
-        }
-
-        requestAnimationFrame(animate);
-    }
-
-    function easeOutQuart(t) {
-        return 1 - Math.pow(1 - t, 4);
-    }
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
